@@ -7,7 +7,7 @@ GROUP BY C.CUSTOMER_ID,C.NAME;
 -- Total revenue (sum of payments)
 SELECT SUM(AMOUNT) FROM PAYMENTS ;
 
--- Find customers who never placed an order
+-- Customers who never placed an order
 SELECT C.CUSTOMER_ID,C.NAME FROM CUSTOMERS C
 LEFT JOIN ORDERS O
 ON O.CUSTOMER_ID = C.CUSTOMER_ID
@@ -30,7 +30,7 @@ SELECT YEAR(PAYMENT_DATE) AS YEAR,MONTHNAME(PAYMENT_DATE) AS MONTH,SUM(AMOUNT) A
 FROM payments
 GROUP BY YEAR(PAYMENT_DATE),MONTHNAME(PAYMENT_DATE);
 
--- Find top 2 customers who spent the most money
+-- top 2 customers who spent the most money
 
 SELECT *
 FROM (
@@ -46,7 +46,7 @@ FROM (
 ) t
 WHERE rnk = 2;
 
--- Find top customer in each month
+-- top customer in each month
 SELECT * FROM (
 	SELECT O.CUSTOMER_ID,
     C.NAME,
@@ -63,10 +63,7 @@ SELECT * FROM (
     ) AS T
 WHERE rnk = 1;
 
--- Segment customers into:
--- High spenders (> 30000)
--- Medium (10000–30000)
--- Low (< 10000)
+-- Customer Segmentation
 
 SELECT O.CUSTOMER_ID,
 C.NAME,

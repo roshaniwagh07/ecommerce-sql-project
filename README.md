@@ -34,3 +34,31 @@ The database consists of the following tables:
 ## 🛠️ Tools Used
 
 * MySQL
+## 📸 Sample Queries
+
+### 🔹 Top Customers
+
+```sql
+SELECT c.customer_id, c.name, SUM(oi.price * oi.quantity) AS total_spend
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY c.customer_id, c.name
+ORDER BY total_spend DESC;
+```
+
+### 🔹 Monthly Revenue
+
+```sql
+SELECT YEAR(payment_date), MONTH(payment_date), SUM(amount)
+FROM payments
+GROUP BY YEAR(payment_date), MONTH(payment_date);
+```
+
+---
+
+## 🌟 Future Improvements
+
+* Add Power BI dashboard
+* Add more real-world datasets
+* Optimize queries using indexing
